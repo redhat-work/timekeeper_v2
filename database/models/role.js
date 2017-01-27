@@ -4,8 +4,7 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('role', {
     id_role: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: "nextval(seq_role::regclass)",
+      autoIncrement: true,
       primaryKey: true
     },
     name: {
@@ -21,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'role'
+    tableName: 'role',
+    "timestamps": false
   });
 };

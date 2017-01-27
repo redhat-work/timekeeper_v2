@@ -4,8 +4,7 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('project', {
     id_project: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: "nextval(seq_project::regclass)",
+      autoIncrement: true,
       primaryKey: true
     },
     id_pm: {
@@ -53,6 +52,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'project'
+    tableName: 'project',
+    "timestamps": false
   });
 };

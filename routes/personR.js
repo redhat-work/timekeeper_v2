@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var person = require('../controllers/personC');
+var project = require('../controllers/projectC');
 
 
-router.get('/persons', person.all);
-router.post('/persons', person.create);
+router.get('/projects/cs/:id', project.byConsultant);
+
 
 module.exports = router;

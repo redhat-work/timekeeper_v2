@@ -19,6 +19,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   }, {
-    tableName: 'person_task'
+    tableName: 'person_task',
+    "timestamps": false
   });
 };

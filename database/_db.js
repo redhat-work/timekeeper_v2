@@ -31,14 +31,37 @@ db
     debug('Error: %s', err);
 });
 
-/* definitions */
+/* data schema definitions */
 var timecard =  db.import(path.join(__dirname,'models/timecard.js'));
 var timecard_entry =  db.import(path.join(__dirname,'models/timecard_entry.js'));
 var person = db.import(path.join(__dirname,'models/person.js'));
+var organization = db.import(path.join(__dirname,'models/organization.js'));
+var org_contact = db.import(path.join(__dirname,'models/org_contact.js'));
+var person_task = db.import(path.join(__dirname,'models/person_task.js'));
+var project = db.import(path.join(__dirname,'models/project.js'));
+var role = db.import(path.join(__dirname,'models/role.js'));
+var task = db.import(path.join(__dirname,'models/task.js'));
 
-timecard.hasMany(timecard_entry,{foreignKey: 'id_timecard'});
+
+/* define relationship between tables */
+person.belongsTo(organization, {foreignKey: 'id_org'});
+person.belongsTo(role, {foreignKey: 'id_role'});
+project.belongsTo(person, {foreignKey: 'id_person'});
+task.belongsTo(project, {foreignKey: 'id_project'});
+task.belongsToMany(person, {through: 'person_task',foreignKey: 'id_person'});
+person.belongsToMany(task, {through: 'person_task',foreignKey: 'id_task'});
+timecard.hasMany(timecard_entry, {foreignKey: 'id_timecard'});
+
+
+
 
 module.exports.db = db;
 module.exports.timecard = timecard;
 module.exports.timecard_entry = timecard_entry;
 module.exports.person = person;
+module.exports.organization = organization;
+module.exports.org_contact = org_contact;
+module.exports.person_task = person_task;
+module.exports.project = project;
+module.exports.role = role;
+module.exports.task = task;

@@ -23,6 +23,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'org_contact'
+    tableName: 'org_contact',
+    "timestamps": false
   });
 };

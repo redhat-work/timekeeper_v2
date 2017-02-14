@@ -8,20 +8,27 @@ var dot = require('dot-object');
 /*# GET #*/
 function byConsultant(req, res, next){
 
-    var consultantID = parseInt(req.param.id);
+    var consultantID = parseInt(req.params.id);
 
-    var options = {};
-    options.include = [
+    var opt = {};
+    opt.include = [
+        {
+            model: task,
+            required: true,
+            include:[
         {
             model: person,
+            required: true,
             through: {
+                attributes: ['id_person'],
                 where: {id_person: consultantID}
             }   
-        },
-        project 
+        }
+            ]
+        }
     ];
 
-    task.findAll(options).then(function(projects) {
+    project.findAll(opt).then(function(projects) {
 
         res.json(projects);
 

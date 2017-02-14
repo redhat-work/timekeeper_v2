@@ -46,10 +46,14 @@ var task = db.import(path.join(__dirname,'models/task.js'));
 /* define relationship between tables */
 person.belongsTo(organization, {foreignKey: 'id_org'});
 person.belongsTo(role, {foreignKey: 'id_role'});
-project.belongsTo(person, {foreignKey: 'id_person'});
+project.belongsTo(person, {foreignKey: 'id_pm'});
+project.hasMany(task,{foreignKey: 'id_project'});
 task.belongsTo(project, {foreignKey: 'id_project'});
 task.belongsToMany(person, {through: 'person_task',foreignKey: 'id_person'});
 person.belongsToMany(task, {through: 'person_task',foreignKey: 'id_task'});
+
+
+timecard.belongsTo(project,{foreignKey: 'id_project'});
 timecard.hasMany(timecard_entry, {foreignKey: 'id_timecard'});
 
 

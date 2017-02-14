@@ -11,6 +11,9 @@ var cors = require('cors');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var personR = require('./routes/personR');
+var projectR = require('./routes/projectR');
+var authR = require('./routes/authR');
+var timecardR = require('./routes/timecardR');
 
 
 
@@ -36,8 +39,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /* Assign Routes */
 app.use('/', routes);
-app.use('/users', users);
-app.use('/api',personR);
+app.use('/', authR);
+
+
+//app.use('/users', users);
+app.use('/api', personR);
+app.use('/api', projectR);
+app.use('/api', timecardR);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

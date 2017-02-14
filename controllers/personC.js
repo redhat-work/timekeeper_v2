@@ -7,11 +7,12 @@ var dot = require('dot-object');
 /*# GET #*/
 function all(req, res, next){
 
-    person.findAll({include:[organization]}).then(function(persons) {
+    person.findAll({include:[organization]})
+    .then( persons => {
 
-        res.json(persons);
+        res.json( persons );
 
-    }).catch(function(err){
+    }).catch( err => {
 
         next(err);
 

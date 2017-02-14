@@ -10,10 +10,6 @@ module.exports = function(sequelize, DataTypes) {
     id_project: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: 'project',
-        key: 'id_project'
-      }
     },
     name: {
       type: DataTypes.STRING,

@@ -54,6 +54,9 @@ person.belongsToMany(task, {through: 'person_task',foreignKey: 'id_task'});
 
 
 timecard.belongsTo(project,{foreignKey: 'id_project'});
+timecard.belongsTo(person,{foreignKey: 'id_consultant'});
+timecard_entry.belongsTo(task,{foreignKey: 'id_task'});
+
 timecard.hasMany(timecard_entry, {foreignKey: 'id_timecard'});
 
 

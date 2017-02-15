@@ -3,6 +3,7 @@ var person = _db.person;
 var timecard = _db.timecard;
 var timecard_entry = _db.timecard_entry;
 var project = _db.project;
+var task = _db.task;
 
 var dot = require('dot-object');
 
@@ -12,10 +13,15 @@ function byID(req, res, next){
     var options = {};
     options.include= [{
         model: timecard_entry,
-        required: true
-    }];
-    options.order = [[timecard_entry, 'day', 'ASC']];
+        required: true,
+        //order : [[timecard_entry, 'day', 'ASC']]
 
+    },{
+        model: person,
+        attributes:['name']
+    }];
+    options.order = [['id_timecard','DESC'],[timecard_entry, 'day', 'ASC']];
+    options.include.push(project);
 
     if(req.params.idcs){
 
@@ -23,10 +29,8 @@ function byID(req, res, next){
         options.where= {
             id_consultant: parseInt(req.params.idcs),
         }
-        options.include.push(project);
 
     }else if(req.params.idpm){
-        options.include.push(project);
         /*options.include.push({
             model: project,
             required: true,
@@ -35,8 +39,6 @@ function byID(req, res, next){
             }
         });*/
     }
-
-    console.log(req.decoded);
 
 
     timecard.findAll(options)
@@ -53,7 +55,45 @@ function byID(req, res, next){
 }
 
 
+/*# GET #*/
+function byTcID(req, res, next){
+
+    var options = {};
+    options.include= [{
+        model: timecard_entry,
+        required: true,
+        include: [{
+            model:task,
+            attributes:['name']
+        }]
+    },{
+        model: person,
+        attributes:['name']
+    }];
+    options.order = [[timecard_entry, 'id_task', 'ASC'],[timecard_entry, 'day', 'ASC']];
+    options.include.push(project);
+    //options.group = ["task.name"];
+
+    options.where= {
+        id_timecard: parseInt(req.params.idtc),
+    }
+
+    timecard.findOne(options)
+    .then( tc => {
+
+        res.json( tc );
+
+    }).catch( err => {
+
+        next(err);
+
+	});
+
+}
+
+
 
 module.exports = {
     byID:byID,
+    byTcID:byTcID
 };

@@ -16,7 +16,7 @@ var config = {
   "underscored":true,
   "timestamps": false,
   "omitNull": true,
-  "logging": debug
+  "logging": console.log
 }
 
 var db = new sequelize(config.database, config.username, config.password, config);
@@ -49,8 +49,8 @@ person.belongsTo(role, {foreignKey: 'id_role'});
 project.belongsTo(person, {foreignKey: 'id_pm'});
 project.hasMany(task,{foreignKey: 'id_project'});
 task.belongsTo(project, {foreignKey: 'id_project'});
-task.belongsToMany(person, {through: 'person_task',foreignKey: 'id_person'});
-person.belongsToMany(task, {through: 'person_task',foreignKey: 'id_task'});
+task.belongsToMany(person, {through: 'person_task',foreignKey: 'id_task', unique:true});
+person.belongsToMany(task, {through: 'person_task',foreignKey: 'id_person', unique:true});
 
 
 timecard.belongsTo(project,{foreignKey: 'id_project'});
@@ -58,7 +58,7 @@ timecard.belongsTo(person,{foreignKey: 'id_consultant'});
 timecard_entry.belongsTo(task,{foreignKey: 'id_task'});
 
 timecard.hasMany(timecard_entry, {foreignKey: 'id_timecard'});
-
+organization.belongsTo(org_contact,{foreignKey: 'id_org'});
 
 
 

@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('org_contact', {
     id_contact: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      autoIncrement: true,
+      primaryKey: true
     },
     id_org: {
       type: DataTypes.INTEGER,

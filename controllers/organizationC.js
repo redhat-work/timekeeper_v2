@@ -1,5 +1,6 @@
 var _db = require('../database/_db');
 var organization = _db.organization;
+var org_contact = _db.org_contact;
 
 var dot = require('dot-object');
 
@@ -22,7 +23,7 @@ function all(req, res, next){
 /*# GET #*/
 function byID(req, res, next){
 
-    organization.findById(req.params.id)
+    organization.findById(req.params.id, {include:[org_contact]})
     .then( org => {
 
         res.json( org );

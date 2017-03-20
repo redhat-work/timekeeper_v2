@@ -14,6 +14,7 @@ var personR = require('./routes/personR');
 var projectR = require('./routes/projectR');
 var authR = require('./routes/authR');
 var timecardR = require('./routes/timecardR');
+var organizationR = require('./routes/organizationR');
 
 
 
@@ -46,6 +47,7 @@ app.use('/', authR);
 app.use('/api', personR);
 app.use('/api', projectR);
 app.use('/api', timecardR);
+app.use('/api', organizationR);
 
 
 // catch 404 and forward to error handler

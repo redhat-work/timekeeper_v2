@@ -19,7 +19,24 @@ function all(req, res, next){
 
 }
 
+/*# GET #*/
+function byID(req, res, next){
+
+    organization.findById(req.params.id)
+    .then( org => {
+
+        res.json( org );
+
+    }).catch( err => {
+
+        next(err);
+
+	});
+
+}
+
 
 module.exports = {
     all:all,
+    byID:byID
 };

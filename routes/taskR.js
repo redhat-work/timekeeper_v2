@@ -4,6 +4,6 @@ var router = express.Router();
 var taskC = require('../controllers/taskC');
 
 
-router.get('/task/cs/:id_person:/project/:id_project', taskC.allByConsultantProject);
+router.get('/tasks/cs/:id_person/pj/:id_project', taskC.allByConsultantProject);
 
 module.exports = router;

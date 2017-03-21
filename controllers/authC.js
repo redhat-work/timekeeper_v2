@@ -28,7 +28,7 @@ auth.login = function(req,res,next){
         if(user){
             console.log("Usuario " +user.username+" logado com sucesso!");
             user.token = jwt.sign(user, config.secret , {
-            expiresIn : 60*60*2 // expires in 2 hours
+            expiresIn : 60*60*24 // expires in 2 hours
         
             });
             res.status(200).json(user);

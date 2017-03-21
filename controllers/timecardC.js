@@ -8,7 +8,7 @@ var task = _db.task;
 var dot = require('dot-object');
 
 /*# GET #*/
-function byID(req, res, next){
+function byPersonID(req, res, next){
 
     var options = {};
     options.include= [{
@@ -94,6 +94,6 @@ function byTcID(req, res, next){
 
 
 module.exports = {
-    byID:byID,
+    byPersonID:byPersonID,
     byTcID:byTcID
 };

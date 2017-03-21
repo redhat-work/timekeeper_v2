@@ -3,6 +3,7 @@ var _db = require('../database/_db');
 var config = require('../config'); 
 var jwt    = require('jsonwebtoken');
 var person = _db.person;
+var role = _db.role;
 
 var auth= {};
 /**
@@ -18,6 +19,7 @@ auth.login = function(req,res,next){
     person
     .findOne({
         raw: true,
+        include:[role],
         where: {
             password: hash,
             email: req.body.email

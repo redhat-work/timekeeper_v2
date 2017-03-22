@@ -22,6 +22,37 @@ function all(req, res, next){
 
 }
 
+/*# GET BY ID #*/
+function getByID(req, res, next){
+
+      var opt = {};
+    opt.include = [
+        {
+            model: task,
+            required: true,
+            include:[
+                {
+                    model: person,
+                    required: true,
+                    through: {
+                        where: {id_person: req.userData.id_person}
+                    }   
+                }
+            ]
+        }
+    ];
+
+    project.findById(req.params.id, opt).then(function(pj) {
+
+        res.json(pj);
+
+    }).catch(function(err){
+
+        next(err);
+
+	});
+
+}
 
 
 /*# GET #*/
@@ -62,5 +93,6 @@ function byConsultant(req, res, next){
 
 module.exports = {
     byConsultant:byConsultant,
-    all:all
+    all:all,
+    getByID:getByID
 };

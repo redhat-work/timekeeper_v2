@@ -23,7 +23,7 @@ function all(req, res, next){
 }
 
 /*# GET BY ID #*/
-function getByID(req, res, next){
+function getProjectByID(req, res, next){
 
       var opt = {};
     opt.include = [
@@ -94,5 +94,5 @@ function byConsultant(req, res, next){
 module.exports = {
     byConsultant:byConsultant,
     all:all,
-    getByID:getByID
+    getProjectByID:getProjectByID
 };

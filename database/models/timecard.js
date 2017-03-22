@@ -38,6 +38,10 @@ module.exports = function(sequelize, DataTypes) {
     on_pa: {
       type: DataTypes.BOOLEAN,
       allowNull: true
+    },
+    period: {
+      type: DataTypes.DATE,
+      allowNull: true
     }
   }, {
     tableName: 'timecard',

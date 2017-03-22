@@ -17,6 +17,7 @@ var timecardR = require('./routes/timecardR');
 var organizationR = require('./routes/organizationR');
 var roleR = require('./routes/roleR');
 var taskR = require('./routes/taskR');
+var periodR = require('./routes/periodR');
 
 var app = express();
 
@@ -50,6 +51,7 @@ app.use('/api', timecardR);
 app.use('/api', organizationR);
 app.use('/api', roleR);
 app.use('/api', taskR);
+app.use('/api',periodR);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
